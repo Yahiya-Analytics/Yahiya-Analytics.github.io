@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Yahiya Ahmed — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0D1117;
+  --bg2:     #161B22;
+  --bg3:     #21262D;
+  --card:    #161B22;
+  --border:  #30363D;
+  --border2: rgba(88,166,255,0.3);
+  --accent:  #58A6FF;
+  --green:   #3FB950;
+  --purple:  #A371F7;
+  --orange:  #F0883E;
+  --red:     #F85149;
+  --text:    #E6EDF3;
+  --muted:   #8B949E;
+  --mono:    'Space Mono', monospace;
+  --sans:    'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── SCROLL PROGRESS BAR ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
+/* ── GRID BG ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 60%, transparent 100%);
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6vw;
+  height: 60px;
+  background: transparent;
+  z-index: 100;
+  transition: background 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+}
+.nav-logo-icon {
+  width: 18px; height: 18px;
+  color: var(--accent);
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  display: block;
+  padding: 6px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--text);
+  background: var(--bg3);
+}
+.nav-links a.active { color: var(--accent); }
+
+/* ── HERO ── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 6vw 0;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(88,166,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 760px; width: 100%; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+  letter-spacing: 0.04em;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.hero-title-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 0.8rem;
+}
+.title-divider { height: 1px; width: 48px; background: var(--accent); }
+.hero-role {
+  font-family: var(--mono);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--accent);
+  font-weight: 400;
+}
+.hero-pitch {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 2.4rem;
+  line-height: 1.85;
+}
+.hero-pitch strong { color: var(--text); font-weight: 500; }
+
+/* typing cursor */
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  background: var(--accent);
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 700;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+}
+.btn-primary:hover {
+  background: #79B8FF;
+  box-shadow: 0 0 24px rgba(88,166,255,0.35);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── SECTION CHROME ── */
+.section-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 100px 6vw;
+  position: relative;
+  z-index: 1;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 3rem;
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 400;
+}
+.section-title {
+  font-family: var(--mono);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  color: var(--text);
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 300px;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.about-text p strong { color: var(--text); }
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--mono);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* ── PROJECT CARDS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 1.4rem;
+}
+.proj-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.proj-card:hover {
+  border-color: rgba(88,166,255,0.45);
+  box-shadow: 0 0 30px rgba(88,166,255,0.08);
+  transform: translateY(-3px);
+}
+.proj-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(88,166,255,0.04), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+.proj-card:hover::after { opacity: 1; }
+
+/* macOS traffic lights from v0 */
+.proj-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: var(--red); }
+.dot-y { background: var(--orange); }
+.dot-g { background: var(--green); }
+
+.proj-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.proj-top-left { flex: 1; }
+.proj-type {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.proj-title {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.proj-card:hover .proj-title { color: var(--accent); }
+.proj-links a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+.proj-links a:hover { color: var(--accent); background: var(--bg3); }
+
+/* data flow pill */
+.data-flow {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 11px;
+  white-space: nowrap;
+  overflow-x: auto;
+  letter-spacing: 0.02em;
+  scrollbar-width: none;
+}
+.data-flow::-webkit-scrollbar { display: none; }
+
+.proj-desc {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.75;
+  flex: 1;
+}
+.proj-highlight {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  background: rgba(88,166,255,0.07);
+  border-left: 2px solid var(--accent);
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--bg3);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.skill-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top-width: 2px;
+  border-radius: 8px;
+  padding: 1.4rem;
+  transition: transform 0.2s;
+}
+.skill-group:hover { transform: translateY(-2px); }
+.skill-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.skill-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.skill-group-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: color 0.2s, border-color 0.2s;
+  cursor: default;
+}
+.chip:hover { color: var(--text); border-color: var(--muted); }
+
+/* terminal block from v0 */
+.terminal-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.terminal-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: 8px;
+}
+.terminal-body { padding: 16px; font-family: var(--mono); font-size: 13px; }
+.t-line { margin-bottom: 6px; }
+.t-prompt { color: var(--green); }
+.t-cmd { color: var(--muted); }
+.t-out { color: var(--text); margin-left: 2px; }
+.t-out::before { content: '> '; color: var(--muted); }
+
+/* ── CONTACT ── */
+.contact-inner { max-width: 600px; }
+.contact-pitch {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+.contact-links { display: flex; flex-direction: column; gap: 10px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  background: var(--bg3);
+  color: var(--accent);
+}
+.contact-link svg { flex-shrink: 0; color: var(--muted); transition: color 0.2s; }
+.contact-link:hover svg { color: var(--accent); }
+.contact-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: 76px;
+  flex-shrink: 0;
+}
+.contact-val { font-size: 14px; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem 6vw;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  position: relative;
+  z-index: 1;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ── FADE IN ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-in.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-glow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+    </svg>
+    yahiya.dev
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      Open to opportunities · Jun 2026
+    </div>
+
+    <h1>Syed Yahiya<span class="cursor"></span></h1>
+
+    <div class="hero-title-line">
+      <span class="title-divider"></span>
+      <span class="hero-role">Data Analyst</span>
+    </div>
+
+    <p class="hero-pitch">
+      Building <strong>end-to-end cloud pipelines</strong>, 
+      <strong>GenAI-powered analytics</strong>, and 
+      <strong>statistical business case studies</strong>.
+      Python · SQL · Snowflake · Tableau · Hyderabad, India.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">→ View Projects</a>
+      <a href="Syed_Yahiya_Resume.pdf" class="btn btn-ghost" download>↓ Resume</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>
+          I'm an aspiring Data Analyst based in Hyderabad building a portfolio that spans
+          <strong>cloud data engineering</strong>, <strong>statistical analysis</strong>, 
+          and <strong>AI-powered automation</strong>.
+        </p>
+        <p>
+          My work covers the full analytical loop — raw ingestion and cleaning through
+          inferential testing to business recommendations. I believe the value of analysis
+          lives in the decision it enables, not the chart it produces.
+        </p>
+        <p>
+          Targeting analytics roles across MBB consulting, Big 4, analytics pure-plays,
+          and BFSI GCCs. Open to Hyderabad-based full-time roles from June 2026.
+        </p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-num">4</span>
+          <div class="stat-label">Portfolio Projects</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">500K+</span>
+          <div class="stat-label">Rows Analysed</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">8+</span>
+          <div class="stat-label">Tools in Stack</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Jun '26</span>
+          <div class="stat-label">Available From</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- P1 -->
+      <div class="proj-card fade-in">
+        <div class="proj-top">
+          <div class="proj-top-left">
+            <div class="proj-dots">
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+            </div>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Yahiya-711/analytics-pipeline" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="proj-type">Data Engineering · ETL · BI</div>
+          <div class="proj-title">End-to-End Cloud Analytics Pipeline</div>
+        </div>
+        <div class="data-flow">S3 raw → Airbyte CDC → Snowflake DWH → Neon OLAP → Tableau</div>
+        <p class="proj-desc">
+          Designed schema-on-write ingestion from AWS S3 into Snowflake using Airbyte
+          change-data-capture connectors. Built a secondary OLAP layer on Neon Cloud Postgres
+          with pre-aggregated fact tables, cutting dashboard query time from ~8s to under 1s.
+          Delivered 3 Tableau dashboards — sales trend, SKU velocity, regional breakdowns —
+          enabling self-serve reporting with zero recurring analyst requests.
+        </p>
+        <div class="proj-highlight">~70% reduction in manual refresh · Query latency 8s → &lt;1s</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Snowflake</span>
+          <span class="tag">AWS S3</span><span class="tag">Airbyte</span>
+          <span class="tag">Neon Postgres</span><span class="tag">Tableau</span>
+          <span class="tag">CDC</span><span class="tag">Star Schema</span>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="proj-card fade-in">
+        <div class="proj-top">
+          <div class="proj-top-left">
+            <div class="proj-dots">
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+            </div>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Yahiya-711/profitability-audit" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="proj-type">Statistical Analysis · EDA · Business Intelligence</div>
+          <div class="proj-title">Profitability &amp; Return Audit</div>
+        </div>
+        <div class="data-flow">Raw CSV → Cleaning → EDA → Hypothesis Testing → RFM → Dashboard</div>
+        <p class="proj-desc">
+          Ingested 500K+ UCI Online Retail II transactions. Applied IQR-based outlier removal,
+          null imputation, and dtype normalisation. Segmented customers via RFM scoring, then
+          confirmed return-rate concentration in premium SKUs using Mann-Whitney U (p &lt; 0.001)
+          and validated cross-category price variance with Kruskal-Wallis (H=142, p &lt; 0.001).
+          Findings surfaced in an executive Tableau dashboard with margin-leakage drill-downs.
+        </p>
+        <div class="proj-highlight">23% return rate in premium tier · Projected 8% EBITDA recovery</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Pandas</span>
+          <span class="tag">SciPy</span><span class="tag">Seaborn</span>
+          <span class="tag">Tableau</span><span class="tag">RFM</span>
+          <span class="tag">Mann-Whitney U</span><span class="tag">Kruskal-Wallis</span>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="proj-card fade-in">
+        <div class="proj-top">
+          <div class="proj-top-left">
+            <div class="proj-dots">
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+            </div>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Yahiya-711/augmented-analytics" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="proj-type">GenAI · Automated EDA · NL-to-Insight</div>
+          <div class="proj-title">Augmented Analytics System</div>
+        </div>
+        <div class="data-flow">CSV upload → Gemini profiling → Auto-EDA → Test selection → Insight narration</div>
+        <p class="proj-desc">
+          Fully automated analysis platform powered by Gemini API. On CSV upload: Gemini
+          profiles schema, generates and executes cleaning code, selects statistically
+          appropriate tests per column pair (t-test, chi-square, ANOVA, correlation), renders
+          Seaborn charts, and produces a plain-English business narrative — with zero user
+          intervention. Streamlit front-end supports multi-table joins via natural language prompt.
+        </p>
+        <div class="proj-highlight">Full EDA cycle: 3 hours → &lt;5 min · Zero analyst coding</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Gemini API</span>
+          <span class="tag">Streamlit</span><span class="tag">Pandas</span>
+          <span class="tag">Seaborn</span><span class="tag">Auto-EDA</span>
+          <span class="tag">LLM Orchestration</span>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="proj-card fade-in">
+        <div class="proj-top">
+          <div class="proj-top-left">
+            <div class="proj-dots">
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+            </div>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Yahiya-711/automl-agent" target="_blank">GitHub ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="proj-type">Agentic AI · AutoML · On-Premise MLOps</div>
+          <div class="proj-title">Sovereign AutoML Agent</div>
+        </div>
+        <div class="data-flow">Raw data → DeepSeek R1 preprocessing → Feature eng → Model selection → Eval report</div>
+        <p class="proj-desc">
+          Agentic ML orchestration framework running entirely on local infrastructure via Ollama.
+          DeepSeek R1 drives each stage autonomously: schema inference, missing-value strategy,
+          feature engineering, algorithm selection (regression/classification/clustering),
+          cross-validation, and a final model card with metrics. Purpose-built for BFSI and
+          healthcare environments with PHI or MNPI data sovereignty constraints.
+        </p>
+        <div class="proj-highlight">Zero cloud cost · Zero data egress · 60% faster experiments</div>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Ollama</span>
+          <span class="tag">DeepSeek R1</span><span class="tag">Agentic Workflow</span>
+          <span class="tag">AutoML</span><span class="tag">Data Sovereignty</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: rgba(22,27,34,0.4);">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="skills-grid fade-in">
+      <div class="skill-group" style="border-top-color: #58A6FF;">
+        <div class="skill-group-header">
+          <div class="skill-icon" style="background: rgba(88,166,255,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#58A6FF" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <span class="skill-group-title">Languages</span>
+        </div>
+        <div class="skill-chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group" style="border-top-color: #3FB950;">
+        <div class="skill-group-header">
+          <div class="skill-icon" style="background: rgba(63,185,80,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FB950" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="skill-group-title">Libraries</span>
+        </div>
+        <div class="skill-chips">
+          <span class="chip">Pandas</span><span class="chip">NumPy</span>
+          <span class="chip">SciPy</span><span class="chip">Seaborn</span>
+          <span class="chip">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="skill-group" style="border-top-color: #A371F7;">
+        <div class="skill-group-header">
+          <div class="skill-icon" style="background: rgba(163,113,247,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A371F7" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          </div>
+          <span class="skill-group-title">BI &amp; Cloud</span>
+        </div>
+        <div class="skill-chips">
+          <span class="chip">Tableau</span><span class="chip">Snowflake</span>
+          <span class="chip">AWS S3</span><span class="chip">Neon Postgres</span>
+          <span class="chip">Airbyte</span>
+        </div>
+      </div>
+
+      <div class="skill-group" style="border-top-color: #F0883E;">
+        <div class="skill-group-header">
+          <div class="skill-icon" style="background: rgba(240,136,62,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0883E" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <span class="skill-group-title">AI &amp; Tools</span>
+        </div>
+        <div class="skill-chips">
+          <span class="chip">Gemini API</span><span class="chip">Ollama</span>
+          <span class="chip">DeepSeek R1</span><span class="chip">Streamlit</span>
+          <span class="chip">Git</span><span class="chip">Jupyter</span>
+        </div>
+      </div>
+
+      <div class="skill-group" style="border-top-color: #F85149; grid-column: 1 / -1;">
+        <div class="skill-group-header">
+          <div class="skill-icon" style="background: rgba(248,81,73,0.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F85149" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <span class="skill-group-title">Analytical Concepts</span>
+        </div>
+        <div class="skill-chips">
+          <span class="chip">Exploratory Data Analysis</span>
+          <span class="chip">Hypothesis Testing</span>
+          <span class="chip">RFM Segmentation</span>
+          <span class="chip">A/B Testing</span>
+          <span class="chip">ETL Pipeline Design</span>
+          <span class="chip">Statistical Inference</span>
+          <span class="chip">Descriptive Statistics</span>
+          <span class="chip">Data Cleaning</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terminal block from v0 -->
+    <div class="terminal-block fade-in" style="margin-top: 2rem;">
+      <div class="terminal-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="terminal-title">terminal — yahiya@analyst</span>
+      </div>
+      <div class="terminal-body">
+        <div class="t-line"><span class="t-prompt">$ </span><span class="t-cmd">echo $CURRENT_FOCUS</span></div>
+        <div class="t-line t-out">Building statistical case studies &amp; cloud pipelines</div>
+        <div class="t-line" style="margin-top: 10px;"><span class="t-prompt">$ </span><span class="t-cmd">cat learning_queue.txt</span></div>
+        <div class="t-line t-out">dbt · Apache Airflow · Advanced SQL window functions · MLOps</div>
+        <div class="t-line" style="margin-top: 10px;"><span class="t-prompt">$ </span><span class="t-cmd">cat availability.txt</span></div>
+        <div class="t-line t-out" style="color: #3FB950;">Open to full-time DA roles in Hyderabad from June 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-inner fade-in">
+      <p class="contact-pitch">
+        Open to full-time Data Analyst roles in Hyderabad from June 2026.
+        Reach out through any channel below — I typically respond within 24 hours.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:yahiyaoman15@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="contact-label">Email</span>
+          <span class="contact-val">yahiyaoman15@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/syed-yahiya-ahmed-515920299" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-val">syed-yahiya-ahmed-515920299</span>
+        </a>
+        <a href="https://github.com/Yahiya-711" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-val">github.com/Yahiya-711</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>built with ♥ by </span>
+  <a href="https://github.com/Yahiya-711" target="_blank">Syed Yahiya Ahmed</a>
+  <span> · Hyderabad, India · 2026</span>
+</footer>
+
+<script>
+// ── SCROLL PROGRESS ──
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  bar.style.width = Math.min(pct, 100) + '%';
+});
+
+// ── NAV SCROLL STYLE ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// ── ACTIVE NAV LINK ON SCROLL ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => observer.observe(s));
+
+// ── FADE IN ──
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 90);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>
